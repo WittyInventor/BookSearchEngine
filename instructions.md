@@ -154,7 +154,7 @@ You’ll need to complete the following tasks in each of these back-end files:
 ### Front-End Specifications
 
 You'll need to create the following front-end files:
-
+<!-- Completed most below Need to double check a few things-->
 * `queries.js`: This will hold the query `GET_ME`, which will execute the `me` query set up using Apollo Server.
 
 * `mutations.js`:
