@@ -86,6 +86,8 @@ In order for this application to use a GraphQL API, you’ll need to refactor th
 
 ### Back-End Specifications
 
+everthing else in back end isdone except for one part
+
 You’ll need to complete the following tasks in each of these back-end files:
 
 * `auth.js`: Update the auth middleware function to work with the GraphQL API.
@@ -132,7 +134,7 @@ You’ll need to complete the following tasks in each of these back-end files:
 
 			* `bookId` (Not the `_id`, but the book's `id` value returned from Google's Book API.)
 
-			* `authors` (An array of strings, as there may be more than one author.)
+			Need to do figure out:  TODO: * `authors` (An array of strings, as there may be more than one author.)
 
 			* `description`
 
