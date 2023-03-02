@@ -40,7 +40,7 @@ export const SAVE_BOOK = gql`
     }
   }
 `;
-
+// verify this is correct due to trouble finding example 
 export const REMOVE_BOOK = gql`
   mutation removeBook ($bookId: ID!) {
     removeBook(bookId: $bookId) {

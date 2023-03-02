@@ -134,7 +134,7 @@ You’ll need to complete the following tasks in each of these back-end files:
 
 			* `bookId` (Not the `_id`, but the book's `id` value returned from Google's Book API.)
 
-			Need to do figure out:  TODO: * `authors` (An array of strings, as there may be more than one author.)
+			Need to do figure out:  TODO: * `authors` (An array of strings, as there may be more than one author.) fixed
 
 			* `description`
 
@@ -157,7 +157,7 @@ You'll need to create the following front-end files:
 <!-- Completed most below Need to double check a few things-->
 * `queries.js`: This will hold the query `GET_ME`, which will execute the `me` query set up using Apollo Server.
 
-* `mutations.js`:
+<!-- * `mutations.js`: finished mutations except for double checking remove book -->
 
 	* `LOGIN_USER` will execute the `loginUser` mutation set up using Apollo Server.
 

@@ -52,7 +52,7 @@ const resolvers = {
       );
     },
     deleteBook: async (parent, { userId, bookId }) => {
-      return Thought.findOneAndUpdate(
+      return User.findOneAndUpdate(
         { _id: userId },
         { $pull: { savedBooks: { _id: bookId } } },
         { new: true }
