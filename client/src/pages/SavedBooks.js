@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Jumbotron, Container, CardColumns, Card, Button } from 'react-bootstrap';
 import { useQuery, useMutation } from '@apollo/client';
 import { GET_ME } from '../utils/queries';
@@ -8,43 +8,24 @@ import Auth from '../utils/auth';
 import { removeBookId } from '../utils/localStorage';
 
 const SavedBooks = () => {
-  const [userData, setUserData] = useState({});
+  // const [userData, setUserData] = useState({});
+  
+  
+  const [removeBook]= useMutation(REMOVE_BOOK);
 
+
+  // the code below means we are getting the information about the user with the Query GET_ME. Then it will return 2 variables which is loading and data. while the Query is being executed the loading variable will be equal to true and data = null because its loading. Once its done loading, the loading will = false and the data will = result of the information. 
+    const { loading, data } = useQuery(GET_ME);
+    let userData = data?.me || {};
+    // the code above means - that ? = an if statement - So if .me is inside the data- then its equal to user data. the || means or statement and {} means an empty object. therefore, it also means, or if its not equal to userData then its an empty object.
+
+    // if and while the loading is = the true, we will display a loading text for the user. when it does load, it will return the actual page 
+ if (loading) {
+  return<div>
+  loading...
+ </div>}
   // use this to determine if `useEffect()` hook needs to run again
   const userDataLength = Object.keys(userData).length;
-
-  setUserData ( () =>{
-    const { loading, data } = useQuery(GET_ME)});
-
-    // useQuery is getting the GET_ME from the graphQL
-
-  // useEffect(() => {
-  //   const getUserData = async () => {
-  //     try {
-  //       const token = Auth.loggedIn() ? Auth.getToken() : null;
-
-  //       if (!token) {
-  //         return false;
-  //       }
-
-  //       const response = await getMe(token);
-
-  //       if (!response.ok) {
-  //         throw new Error('something went wrong!');
-  //       }
-
-  //       const user = await response.json();
-  //       setUserData(user);
-  //     } catch (err) {
-  //       console.error(err);
-  //     }
-  //   };
-
-  //   getUserData();
-  // }, [userDataLength]);
-
-
-
 
   // create function that accepts the book's mongo _id value as param and deletes the book from the database
   const handleDeleteBook = async (bookId) => {
@@ -55,17 +36,10 @@ const SavedBooks = () => {
     }
 
     try {
-      // const response = await deleteBook(bookId, token);
-      const [response, { error }] = useMutation(REMOVE_BOOK);
+    const {updatedUser} = await removeBook ({variables:{bookId}})
+      userData = updatedUser
 
-  
-      if (!response.ok) {
-        throw new Error('something went wrong!');
-      }
-
-      const updatedUser = await response.json();
-      setUserData(updatedUser);
-      // upon success, remove book's id from localStorage
+    // upon success, remove book's id from localStorage
       removeBookId(bookId);
     } catch (err) {
       console.error(err);

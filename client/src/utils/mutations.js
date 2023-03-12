@@ -1,5 +1,7 @@
 import { gql } from '@apollo/client';
 
+// LOGIN_USER is the variable that holds the mutation in graphQL. the actual mutation is the login function in here below
+// when we export the LOGIN_USER to make it available for other files in the graphQL 
 export const LOGIN_USER = gql`
   mutation login($email: String!, $password: String!) {
     login(email: $email, password: $password) {
@@ -24,10 +26,10 @@ export const ADD_USER = gql`
   }
 `;
 
-// fix this below later.
+// TODO: This needs to be fixed below later, not sure..its hard to see if this is working because its not running.
 export const SAVE_BOOK = gql`
   mutation saveBook($userId: ID!, $commentText: String!) {
-    addComment(thoughtId: $thoughtId, commentText: $commentText) {
+    saveBook(thoughtId: $thoughtId, commentText: $commentText) {
       _id
       thoughtText
       thoughtAuthor

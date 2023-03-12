@@ -11,6 +11,8 @@ const LoginForm = () => {
   const [userFormData, setUserFormData] = useState({ email: '', password: '' });
   const [validated] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
+  const [ login ] = useMutation(LOGIN_USER);
+  // when we use the useMutation (LOGIN_USER) it will return the login mutation in the mutations.js file
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -29,20 +31,15 @@ const LoginForm = () => {
 
     try {
       // const response = await loginUser(userFormData);
+const {data}=await login ({variables:{...userFormData}})
+// // the token gives the user access to the page - it is a series of encrypted string code (letters, numbers,etc) that keeps the information about the user and the session
 
-      const [response, { error }] = useMutation(LOGIN_USER);
-
-      if (!response.ok) {
-        throw new Error('something went wrong!');
-      }
-
-      const { token, user } = await response.json();
-      console.log(user);
-      Auth.login(token);
+      Auth.login(data.login.token);
     } catch (err) {
       console.error(err);
       setShowAlert(true);
     }
+    // setShowAlert(true)= means when if something goes wrong with the login form then the computer will let you know of that so thats that why theres this code. 
 
     setUserFormData({
       username: '',

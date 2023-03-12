@@ -4,6 +4,7 @@ import { Jumbotron, Container, Col, Form, Button, Card, CardColumns } from 'reac
 
 import Auth from '../utils/auth';
 import { searchGoogleBooks } from '../utils/API';
+import {useMutations} from '@apollo/client';
 import { SAVE_BOOK } from '../utils/mutations';
 import { saveBookIds, getSavedBookIds } from '../utils/localStorage';
 
@@ -16,7 +17,7 @@ const SearchBooks = () => {
   // create state to hold saved bookId values
   const [savedBookIds, setSavedBookIds] = useState(getSavedBookIds());
 
-  const [saveBook, { error }] = useMutation(SAVE_BOOK);
+  const [saveBook] = useMutation(SAVE_BOOK);
 
 
   // set up useEffect hook to save `savedBookIds` list to localStorage on component unmount
@@ -71,6 +72,7 @@ const SearchBooks = () => {
 
     try {
       const response = await saveBook(bookToSave, token);
+      //change it to make it work with graphQL
 
       if (!response.ok) {
         throw new Error('something went wrong!');

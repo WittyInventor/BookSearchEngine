@@ -13,6 +13,7 @@ const SignupForm = () => {
   const [validated] = useState(false);
   // set state for alert
   const [showAlert, setShowAlert] = useState(false);
+  const [addUser] = useMutation(ADD_USER);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -31,20 +32,15 @@ const SignupForm = () => {
 
     try {
       // const response = await createUser(userFormData);
+     const  {data}=await addUser ({variables:{...userFormData}})
 
-      const [response, { error }] = useMutation(ADD_USER);
-
-      if (!response.ok) {
-        throw new Error('something went wrong!');
-      }
-
-      const { token, user } = await response.json();
-      console.log(user);
-      Auth.login(token);
+    //  this code below means that this will set the authorization the  client side- we got the authorization from the server and store it client side for the next request to the server. When you logged in the server knows who you are and creates a token for you to use the web session that your requesting in the book search session. 
+      Auth.login(data.addUser.token);
     } catch (err) {
       console.error(err);
       setShowAlert(true);
     }
+// setShowAlert(true)= means when if something goes wrong with the sign up form then the computer will let you know of that so thats that why theres this code. 
 
     setUserFormData({
       username: '',
