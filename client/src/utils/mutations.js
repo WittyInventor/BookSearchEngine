@@ -26,19 +26,13 @@ export const ADD_USER = gql`
   }
 `;
 
-// TODO: This needs to be fixed below later, not sure..its hard to see if this is working because its not running.
+
 export const SAVE_BOOK = gql`
-  mutation saveBook($userId: ID!, $commentText: String!) {
-    saveBook(thoughtId: $thoughtId, commentText: $commentText) {
-      _id
-      thoughtText
-      thoughtAuthor
-      createdAt
-      comments {
-        _id
-        commentText
-        createdAt
-      }
+  mutation saveBook($userId: ID!, $authors: String!, $description: String!, $bookId: Int, $image: String!, $link: String!, $title: String! ) {
+    saveBook(userId: $userId, authors: $authors, description: $description, bookId: $bookId, image: $image, link: $link, title: $title  ) {
+       username,
+    email,
+    bookCount
     }
   }
 `;
