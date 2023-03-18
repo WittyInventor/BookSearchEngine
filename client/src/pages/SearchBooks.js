@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { Jumbotron, Container, Col, Form, Button, Card, CardColumns } from 'react-bootstrap';
+import {useMutation, useQuery} from '@apollo/client';
+import { GET_ME } from '../utils/queries';
 
 
 import Auth from '../utils/auth';
 import { searchGoogleBooks } from '../utils/API';
-import {useMutation} from '@apollo/client';
 import { SAVE_BOOK } from '../utils/mutations';
 import { saveBookIds, getSavedBookIds } from '../utils/localStorage';
 
 const SearchBooks = () => {
+  const { loading, data } = useQuery(GET_ME);
+    let userData = data?.me || {};
   // create state for holding returned google api data
   const [searchedBooks, setSearchedBooks] = useState([]);
   // create state for holding our search field data
@@ -71,9 +74,10 @@ const SearchBooks = () => {
     }
 
     try {
+      // console.log(bookToSave)
       //const response = await saveBook(bookToSave, token);
       const  {data}=await saveBook ({variables:{
-        userId: null, authors: bookToSave.authors, description: bookToSave.description, bookId: bookToSave.bookId, image: bookToSave.image, link: "", title: bookToSave.title
+        userId: userData._id, authors: bookToSave.authors[0], description: bookToSave.description, bookId: bookToSave.bookId, image: bookToSave.image, link: "", title: bookToSave.title
       }})
       //change it to make it work with graphQL
 

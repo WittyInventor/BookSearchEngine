@@ -5,7 +5,7 @@ const typeDefs = gql`
     _id: ID!
     authors: [String!]
     description: String!
-    bookId: Int
+    bookId: String!
     image: String!
     link: String!
     title: String!
@@ -39,12 +39,12 @@ const typeDefs = gql`
       userId: ID!
       authors: String!
       description: String!
-      bookId: Int
+      bookId: String!
       image: String!
       link: String!
       title: String!
       ): User
-    removeBook (bookId: ID!): User
+    removeBook (userId: ID!, bookId: String!): User
   }
   
 `;
