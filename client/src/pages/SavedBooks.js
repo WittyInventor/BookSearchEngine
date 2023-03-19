@@ -60,11 +60,13 @@ const SavedBooks = () => {
       </Jumbotron>
       <Container>
         <h2>
+          {/* the code below means that the user is viewing the saved books from user logged in user */}
           {userData.savedBooks.length
             ? `Viewing ${userData.savedBooks.length} saved ${userData.savedBooks.length === 1 ? 'book' : 'books'}:`
             : 'You have no saved books!'}
         </h2>
         <CardColumns>
+          {/* the savedBooks has the array of all the saved books in the data. so the code below is returning the multiple books information from the user that is logged in. showing all their saved books  */}
           {userData.savedBooks.map((book) => {
             return (
               <Card key={book.bookId} border='dark'>

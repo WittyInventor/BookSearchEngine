@@ -56,11 +56,11 @@ const resolvers = {
     removeBook: async (parent, { userId, bookId }) => {
       return User.findOneAndUpdate(
         { _id: userId },
-        { $pull: { savedBooks: { _id: bookId } } },
+        { $pull: { savedBooks: { bookId: bookId } } },
         { new: true }
       );
     },
   },
 };
-
+// in line 59, the code will pull the property of book id which is before the : and then after the : is the value of bookId. 
 module.exports = resolvers;

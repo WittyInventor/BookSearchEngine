@@ -42,6 +42,17 @@ export const REMOVE_BOOK = gql`
     removeBook(userId:$userId, bookId: $bookId) {
       _id
       username
+      email
+      savedBooks {
+        _id
+        authors
+        description
+        bookId
+        image
+        link
+        title
+      }
+      # the code above lines 42-53 - when it removes the code it will return all the information of the logged in user to the client.
     }
   }
 `;
